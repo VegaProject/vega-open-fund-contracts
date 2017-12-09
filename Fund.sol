@@ -77,5 +77,49 @@ contract Fund {
     
     function withdrawalFromValut(uint _wei) returns (bool success);
     
+    /* TRANSFER METHODS FOR VFT */
+    
+    mapping(address => mapping (address => uint256)) allowed;
+    
+    /* transfer VFT */
+    
+    function transfer(address _to, uint256 _amount) returns (bool success) {
+         if (VFT[msg.sender] >= _amount 
+             && _amount > 0
+             && VFT[_to] + _amount > VFT[_to]) {
+             VFT[msg.sender] -= _amount;
+             VFT[_to] += _amount;
+             return true;
+         } else {
+             return false;
+         }
+     }
+     
+    /* transfer from VFT */
+     
+    function transferFrom(
+         address _from,
+         address _to,
+         uint256 _amount
+     ) returns (bool success) {
+         if (VFT[_from] >= _amount
+             && allowed[_from][msg.sender] >= _amount
+             && _amount > 0
+             && VFT[_to] + _amount > VFT[_to]) {
+             VFT[_from] -= _amount;
+             allowed[_from][msg.sender] -= _amount;
+             VFT[_to] += _amount;
+             return true;
+         } else {
+             return false;
+         }
+     }
+     
+     /* approve VFT for transferFrom */
+  
+     function approve(address _spender, uint256 _amount) returns (bool success) {
+         allowed[msg.sender][_spender] = _amount;
+         return true;
+     }
+    
 }
-
