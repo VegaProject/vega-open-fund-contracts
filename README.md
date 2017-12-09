@@ -1,3 +1,3 @@
-# Vega Open Fund
+# The Vega Fund
 
-The Vega Open Fund is an open end mutual fund actively managed by the Vega Network.
+The Vega Fund is an open end fund actively managed by the Vega Network.
